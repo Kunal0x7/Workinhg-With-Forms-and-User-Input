@@ -16,13 +16,13 @@ export default function Signup() {
 
       <div className="control">
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" name="email" />
+        <input id="email" type="email" name="email" autoComplete="email" />
       </div>
 
       <div className="control-row">
         <div className="control">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" name="password" />
+          <input id="password" type="password" name="password" autoComplete="new-password"/>
         </div>
 
         <div className="control">
@@ -31,6 +31,7 @@ export default function Signup() {
             id="confirm-password"
             type="password"
             name="confirm-password"
+            autoComplete="new-password"
           />
         </div>
       </div>
@@ -40,17 +41,17 @@ export default function Signup() {
       <div className="control-row">
         <div className="control">
           <label htmlFor="first-name">First Name</label>
-          <input type="text" id="first-name" name="first-name" />
+          <input type="text" id="first-name" name="first-name" autoComplete="given-name"/>
         </div>
 
         <div className="control">
           <label htmlFor="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" />
+          <input type="text" id="last-name" name="last-name" autoComplete="family-name"/>
         </div>
       </div>
 
       <div className="control">
-        <label htmlFor="phone">What best describes your role?</label>
+        <label htmlFor="role">What best describes your role?</label>
         <select id="role" name="role">
           <option value="student">Student</option>
           <option value="teacher">Teacher</option>

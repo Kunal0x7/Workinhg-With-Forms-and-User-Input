@@ -1,20 +1,40 @@
 import { useState } from "react";
 
 export default function Login() {
-  const [enteredInputValue , setEnteredInputValue]= useState({
-    email:'',
-    password:''
-  })
-  function handleSubmit(event){
+  const [enteredInputValue, setEnteredInputValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [didEdit, setDidEdit] = useState({
+    email: false,
+    password: false,
+  });
+
+  const emailIsInvalid =
+    didEdit.email && !enteredInputValue.email.includes("@");
+
+  function handleSubmit(event) {
     event.preventDefault();
     console.log(enteredInputValue);
   }
 
-  function handleInputChange(identifier , event){
-    setEnteredInputValue( prevValues => ({
+  function handleInputChange(identifier, event) {
+    setEnteredInputValue((prevValues) => ({
       ...prevValues,
-      [identifier] : event.target.value
-    }))
+      [identifier]: event.target.value,
+    }));
+    setDidEdit((prevDidEdit) => ({
+      ...prevDidEdit,
+      [identifier]: false,
+    }));
+  }
+
+  function handleInputBlur(identifier) {
+    setDidEdit((prevDidEdit) => ({
+      ...prevDidEdit,
+      [identifier]: true,
+    }));
   }
 
   return (
@@ -28,9 +48,13 @@ export default function Login() {
             id="email"
             type="email"
             name="email"
-            onChange={(event) => handleInputChange('email', event)}
+            onBlur={() => handleInputBlur("email")}
+            onChange={(event) => handleInputChange("email", event)}
             value={enteredInputValue.email}
           />
+          <div className="control-error">
+            {emailIsInvalid && <p>Please enter a valid email.</p>}
+          </div>
         </div>
 
         <div className="control no-margin">
@@ -39,7 +63,7 @@ export default function Login() {
             id="password"
             type="password"
             name="password"
-            onChange={(event) => handleInputChange('password', event)}
+            onChange={(event) => handleInputChange("password", event)}
             value={enteredInputValue.password}
           />
         </div>
